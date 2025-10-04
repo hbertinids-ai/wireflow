@@ -1,0 +1,36 @@
+# Crontab for user 'hbertini' — Wireflow reboot tasks
+# Place this file on the remote machine and install with:
+#   crontab /path/to/crontab.txt
+# Verify with:
+#   crontab -l
+
+# Environment available to cron jobs
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOME=/home/hbertini
+NODE_ENV=development
+VITE_PORT=5173
+
+# Ensure logs directory exists (create before installing crontab):
+# mkdir -p /home/hbertini/wireflow/log && chown hbertini:hbertini /home/hbertini/wireflow/log
+
+# Use /bin/bash -lc to ensure complex commands (sleep && cd && nohup ...) run correctly
+# Wait a bit after reboot to allow networking/filesystems to settle.
+
+# Backend: start the Node backend (adjust node path if needed)
+@reboot /bin/bash -lc 'sleep 10; cd /home/hbertini/wireflow/wireflow/backend && nohup /usr/bin/node server.js > /home/hbertini/wireflow/log/wireflow-be.log 2>&1 &'
+
+# Frontend (developer): start Vite dev server (developer use only)
+@reboot /bin/bash -lc 'sleep 15; cd /home/hbertini/wireflow/wireflow/frontend && nohup /usr/bin/npm run dev -- --host > /home/hbertini/wireflow/log/wireflow-fe.log 2>&1 &'
+
+# Notes:
+# - Use absolute paths for node/npm to avoid PATH issues in cron.
+# - For production, prefer systemd units (see documentation) rather than cron @reboot.
+# - To install this crontab for user 'hbertini':
+#     scp crontab.txt hbertini@server:/home/hbertini/
+#     ssh hbertini@server
+#     mkdir -p /home/hbertini/wireflow/log
+#     crontab /home/hbertini/crontab.txt
+#     crontab -l
+# - Check logs after reboot: tail -n 200 /home/hbertini/wireflow/log/wireflow-be.log
+#                          tail -n 200 /home/hbertini/wireflow/log/wireflow-fe.log

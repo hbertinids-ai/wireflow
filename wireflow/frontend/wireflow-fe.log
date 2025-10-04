@@ -1,0 +1,42 @@
+nohup: ignoring input
+
+> wireflow-frontend@0.0.0 dev
+> vite --host
+
+
+  VITE v7.1.7  ready in 509 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://10.97.14.90:5173/
+5:21:17 PM [vite] .env changed, restarting server...
+failed to load config from /home/hbertini/wireflow/wireflow/frontend/vite.config.js
+5:21:17 PM [vite] The service is no longer running
+5:21:17 PM [vite] server restart failed
+5:21:17 PM [vite] .env changed, restarting server...
+failed to load config from /home/hbertini/wireflow/wireflow/frontend/vite.config.js
+5:21:17 PM [vite] The service is no longer running
+5:21:17 PM [vite] server restart failed
+5:21:17 PM [vite] .env changed, restarting server...
+failed to load config from /home/hbertini/wireflow/wireflow/frontend/vite.config.js
+5:21:17 PM [vite] The service is no longer running
+5:21:17 PM [vite] server restart failed
+5:21:17 PM [vite] .env changed, restarting server...
+failed to load config from /home/hbertini/wireflow/wireflow/frontend/vite.config.js
+5:21:17 PM [vite] The service is no longer running
+5:21:17 PM [vite] server restart failed
+5:21:41 PM [vite] .env changed, restarting server...
+failed to load config from /home/hbertini/wireflow/wireflow/frontend/vite.config.js
+5:21:41 PM [vite] The service is no longer running
+5:21:41 PM [vite] server restart failed
+5:21:42 PM [vite] .env changed, restarting server...
+failed to load config from /home/hbertini/wireflow/wireflow/frontend/vite.config.js
+5:21:42 PM [vite] The service is no longer running
+5:21:42 PM [vite] server restart failed
+5:21:42 PM [vite] .env changed, restarting server...
+failed to load config from /home/hbertini/wireflow/wireflow/frontend/vite.config.js
+5:21:42 PM [vite] The service is no longer running
+5:21:42 PM [vite] server restart failed
+5:21:42 PM [vite] .env changed, restarting server...
+failed to load config from /home/hbertini/wireflow/wireflow/frontend/vite.config.js
+5:21:42 PM [vite] The service is no longer running
+5:21:42 PM [vite] server restart failed

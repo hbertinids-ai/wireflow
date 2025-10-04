@@ -1,0 +1,53 @@
+{
+  "id": "wf-1758294113214",
+  "name": "Architecture Design Analysis",
+  "nodes": [
+    {
+      "id": "1758396723503",
+      "type": "input",
+      "position": {
+        "x": -8,
+        "y": 234
+      },
+      "data": {
+        "label": "Start"
+      },
+      "width": 150,
+      "height": 68,
+      "selected": true,
+      "positionAbsolute": {
+        "x": -8,
+        "y": 234
+      },
+      "dragging": false
+    },
+    {
+      "id": "1758396724720",
+      "type": "default",
+      "position": {
+        "x": 234.75,
+        "y": 384.5
+      },
+      "data": {
+        "label": "Task"
+      },
+      "width": 150,
+      "height": 68
+    }
+  ],
+  "edges": [
+    {
+      "source": "1758396723503",
+      "target": "1758396724720",
+      "type": "smoothstep",
+      "id": "reactflow__edge-1758396723503-1758396724720",
+      "animated": true
+    }
+  ],
+  "tags": [
+    "tag-1758291959242",
+    "tag-1758293911428"
+  ],
+  "teamId": "team-default",
+  "ownerId": "owner-1758371864041"
+}
