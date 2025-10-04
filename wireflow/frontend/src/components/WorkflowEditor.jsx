@@ -20,6 +20,54 @@ const initialNodes = [
   { id: '1', type: 'input', data: { label: 'Start' }, position: { x: 250, y: 25 } },
 ];
 
+// Helper function to check if a string is a URL
+const isValidUrl = (string) => {
+  try {
+    const url = new URL(string);
+    return url.protocol === 'http:' || url.protocol === 'https:';
+  } catch (_) {
+    return false;
+  }
+};
+
+// Component to render description (either as text or link icon)
+const DescriptionDisplay = ({ description, className = "text-xs text-gray-600 mt-1" }) => {
+  if (!description) return null;
+  
+  if (isValidUrl(description)) {
+    return (
+      <div className={className}>
+        <a
+          href={description}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 nodrag"
+          onClick={(e) => e.stopPropagation()}
+          title={description}
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="h-4 w-4" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" 
+            />
+          </svg>
+          <span className="text-xs">Link</span>
+        </a>
+      </div>
+    );
+  }
+  
+  return <div className={className}>{description}</div>;
+};
+
 // Custom node components with handles and editing
 export const InputNode = ({ data, id, setNodes, setEdges, editingNodeId, setEditingNodeId }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -136,7 +184,7 @@ export const InputNode = ({ data, id, setNodes, setEdges, editingNodeId, setEdit
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="font-semibold text-sm">{data.label || 'Start'}</div>
-      {data.description && <div className="text-xs text-gray-600 mt-1">{data.description}</div>}
+      <DescriptionDisplay description={data.description} />
       <button 
         onMouseDown={handleEdit}
         className="absolute top-1 right-1 w-5 h-5 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 nodrag flex items-center justify-center"
@@ -249,7 +297,7 @@ export const DefaultNode = ({ data, id, setNodes, setEdges }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="font-semibold text-sm">{data.label || 'Task'}</div>
-      {data.description && <div className="text-xs text-gray-600 mt-1">{data.description}</div>}
+      <DescriptionDisplay description={data.description} />
       <button 
         onMouseDown={handleEdit}
         className="absolute top-1 right-1 w-5 h-5 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 nodrag flex items-center justify-center"
@@ -385,7 +433,7 @@ export const DecisionNode = ({ data, id, setNodes, setEdges }) => {
           ref={contentRef}
         >
           <div className="font-semibold text-xs break-words whitespace-pre-wrap">{data.label || 'Decision'}</div>
-          {data.description && <div className="text-xs text-gray-600 mt-1 break-words whitespace-pre-wrap">{data.description}</div>}
+          <DescriptionDisplay description={data.description} className="text-xs text-gray-600 mt-1 break-words whitespace-pre-wrap" />
         </div>
       </div>
       <button
@@ -498,7 +546,7 @@ export const OutputNode = ({ data, id, setNodes, setEdges }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="font-semibold text-sm">{data.label || 'End'}</div>
-      {data.description && <div className="text-xs text-gray-600 mt-1">{data.description}</div>}
+      <DescriptionDisplay description={data.description} />
       <button 
         onMouseDown={handleEdit}
         className="absolute top-1 right-1 w-5 h-5 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 nodrag flex items-center justify-center"
