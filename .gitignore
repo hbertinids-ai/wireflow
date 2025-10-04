@@ -1,0 +1,51 @@
+# Exclude all data files - workflows, backups, user data, etc.
+wireflow/backend/data/
+
+# Keep the data directory structure but ignore all contents
+# If you want to keep an empty directory, add a .gitkeep file manually
+
+# Node modules
+node_modules/
+wireflow/backend/node_modules/
+wireflow/frontend/node_modules/
+wireflow/backend/admin/ui/node_modules/
+
+# Log files
+*.log
+wireflow/backend/*.log
+wireflow/frontend/*.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+wireflow/frontend/.vite/
+wireflow/frontend/dist/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS files
+Thumbs.db
+desktop.ini
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Package lock files (optional - uncomment if you don't want to track them)
+# package-lock.json
+# yarn.lock
+
+# Users file (contains sensitive authentication data)
+wireflow/backend/users.json
