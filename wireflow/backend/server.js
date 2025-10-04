@@ -124,8 +124,8 @@ app.get('/admin/workflow-versions', verifyToken, requireRole('admin'), async (re
     const files = await listWorkflowVersions();
     // Map: {id, name, date, version, file}
     const versionInfo = await Promise.all(files.map(async (file, idx) => {
-      // Example: wf-1758279897913_202509211846376.json
-      const match = file.match(/^(wf-\d+)_([0-9]{8})([0-9]{6,7})\.json$/);
+      // Example: wf-1758279897913_202509211846376.json or wf-1758279897913_202509211846376.json.gz
+      const match = file.match(/^(wf-\d+)_([0-9]{8})([0-9]{6,7})\.json(\.gz)?$/);
       let id = '', date = '', version = idx + 1;
       if (match) {
         id = match[1];

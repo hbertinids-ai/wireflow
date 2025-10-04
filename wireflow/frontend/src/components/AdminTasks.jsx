@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ReactFlow, { Background, Controls, MiniMap } from 'react-flow-renderer';
 import apiFetch from '../api';
 import TeamManager from './TeamManager';
 import OwnerManager from './OwnerManager';
@@ -341,7 +342,52 @@ export default function AdminTasks({ token, role }) {
             {previewData && (
               <div className="border rounded p-3 bg-white shadow">
                 <h4 className="font-bold mb-2">Preview: {selectedVersion}</h4>
-                <pre className="text-xs overflow-x-auto max-h-64">{JSON.stringify(previewData, null, 2)}</pre>
+                <div className="mb-2 text-sm text-gray-600">
+                  <strong>{previewData.name || 'Untitled Workflow'}</strong>
+                  {previewData.description && <span className="ml-2">- {previewData.description}</span>}
+                </div>
+                <div className="text-xs text-gray-500 mb-3">
+                  {previewData.nodes?.length || 0} nodes • {previewData.edges?.length || 0} connections
+                  {previewData.tags && previewData.tags.length > 0 && (
+                    <span className="ml-2">
+                      • Tags: {previewData.tags.join(', ')}
+                    </span>
+                  )}
+                </div>
+                <div style={{ height: '400px', border: '1px solid #e5e7eb', borderRadius: '4px' }}>
+                  <ReactFlow
+                    nodes={previewData.nodes || []}
+                    edges={previewData.edges || []}
+                    fitView
+                    attributionPosition="bottom-left"
+                    nodesDraggable={false}
+                    nodesConnectable={false}
+                    elementsSelectable={false}
+                    zoomOnScroll={false}
+                    panOnScroll={false}
+                    preventScrolling={false}
+                  >
+                    <Background color="#aaa" gap={16} />
+                    <Controls showInteractive={false} />
+                    <MiniMap 
+                      nodeColor={(node) => {
+                        if (node.type === 'input') return '#86efac';
+                        if (node.type === 'output') return '#fca5a5';
+                        if (node.type === 'decision') return '#fde047';
+                        return '#bfdbfe';
+                      }}
+                      maskColor="rgba(0, 0, 0, 0.1)"
+                    />
+                  </ReactFlow>
+                </div>
+                <details className="mt-3">
+                  <summary className="cursor-pointer text-sm text-gray-600 hover:text-gray-800">
+                    View JSON Data
+                  </summary>
+                  <pre className="text-xs overflow-x-auto max-h-64 mt-2 p-2 bg-gray-50 rounded border">
+                    {JSON.stringify(previewData, null, 2)}
+                  </pre>
+                </details>
               </div>
             )}
           </div>
