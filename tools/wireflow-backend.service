@@ -1,0 +1,13 @@
+[Unit]
+Description=Wireflow Backend (Node.js) Service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/hbertini/processmgr/wireflow/backend
+ExecStart=/usr/bin/node server.js
+Restart=always
+Environment=PATH=/usr/bin:/usr/local/bin
+
+[Install]
+WantedBy=multi-user.target

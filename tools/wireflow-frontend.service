@@ -1,0 +1,13 @@
+[Unit]
+Description=Wireflow Frontend (Vite) Service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/hbertini/processmgr/wireflow/frontend
+ExecStart=/usr/bin/npm run dev -- --host
+Restart=always
+Environment=PATH=/usr/bin:/usr/local/bin
+
+[Install]
+WantedBy=multi-user.target
